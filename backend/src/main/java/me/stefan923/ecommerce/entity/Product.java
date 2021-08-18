@@ -47,4 +47,8 @@ public class Product {
     @Column(name = "last_updated")
     private LocalDate lastUpdated;
 
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private ProductCategory category;
+
 }
