@@ -26,6 +26,8 @@ public class ProductRestConfig implements RepositoryRestConfigurer {
                 .forDomainType(ProductCategory.class)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
+
+        config.exposeIdsFor(Product.class, ProductCategory.class);
     }
 
 }
