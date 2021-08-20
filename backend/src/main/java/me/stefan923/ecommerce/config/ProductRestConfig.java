@@ -2,14 +2,26 @@ package me.stefan923.ecommerce.config;
 
 import me.stefan923.ecommerce.entity.Product;
 import me.stefan923.ecommerce.entity.ProductCategory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+import javax.persistence.EntityManager;
+import javax.persistence.metamodel.Type;
+
 @Configuration
 public class ProductRestConfig implements RepositoryRestConfigurer {
+
+    @Autowired
+    private EntityManager entityManager;
+
+    @Autowired
+    public ProductRestConfig(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
@@ -27,7 +39,15 @@ public class ProductRestConfig implements RepositoryRestConfigurer {
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
 
-        config.exposeIdsFor(Product.class, ProductCategory.class);
+        exposeIds(config);
+    }
+
+    private void exposeIds(RepositoryRestConfiguration config) {
+        config.exposeIdsFor(entityManager.getMetamodel()
+                .getEntities()
+                .stream()
+                .map(Type::getJavaType)
+                .toArray(Class[]::new));
     }
 
 }
