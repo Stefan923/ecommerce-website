@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../common/product';
 import { map } from 'rxjs/operators'
+import { ProductCategory } from '../common/product-category';
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,29 @@ export class ProductService {
   getProducts(categoryId: number): Observable<Product[]> {
     const url = `${ ProductService.BASE_URL }/search/findByCategoryId?id=${ categoryId }`;
 
-    return this.httpClient.get<GetResponse>(url).pipe(
+    return this.httpClient.get<GetProductResponse>(url).pipe(
       map(response => response._embedded.products)
+    );
+  }
+
+  getProductCategories(): Observable<ProductCategory[]> {
+    const url = `${ ProductService.BASE_URL }/product-category`;
+
+    return this.httpClient.get<GetProductCategoryResponse>(url).pipe(
+      map(response => response._embedded.productCategories)
     );
   }
 
 }
 
-interface GetResponse {
+interface GetProductResponse {
   _embedded: {
     products: Product[];
+  }
+}
+
+interface GetProductCategoryResponse {
+  _embedded: {
+    productCategories: ProductCategory[];
   }
 }
