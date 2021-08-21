@@ -552,6 +552,10 @@ input.au-input.au-input-xl{
     padding-top:12px;
     margin-bottom:7px
 }
+.product-box h1 a{
+    color: inherit;
+    text-decoration: inherit;
+}
 .product-box h2{
     font-size:15px;
     padding-bottom:0;
