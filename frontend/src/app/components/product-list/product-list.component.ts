@@ -22,19 +22,42 @@ export class ProductListComponent implements OnInit {
   }
 
   listProducts() {
-    let currentCategoryId: number = 1;
+    const searchMode: boolean = this.route.snapshot.paramMap.has('keyword');
+    
+    if (searchMode) {
+      this.handleSearchProducts();
+    } else {
+      this.handleListProducts();
+    }
+  }
+
+  handleSearchProducts() {
+    let keyword: string | null = "";
+    
+    const routeKeyword: string | null = this.route.snapshot.paramMap.get('keyword');
+    keyword = routeKeyword == null ? keyword : routeKeyword;
+
+    this.productService.getProductsByName(keyword).subscribe(
+      data => {
+        this.products = data;
+      }
+    );
+  }
+
+  handleListProducts() {
+    let categoryId: number = 1;
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
     
     if (hasCategoryId) {
       let routeCategoryId: string | null = this.route.snapshot.paramMap.get('id');
-      currentCategoryId = routeCategoryId == null ? 1 : +routeCategoryId;
+      categoryId = routeCategoryId == null ? 1 : +routeCategoryId;
     }
 
-    this.productService.getProducts(currentCategoryId).subscribe(
+    this.productService.getProducts(categoryId).subscribe(
       data => {
         this.products = data;
       }
-    )
+    );
   }
 
 }
