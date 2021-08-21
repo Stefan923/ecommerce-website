@@ -10,12 +10,12 @@ import { ProductCategory } from '../common/product-category';
 })
 export class ProductService {
 
-  private static readonly BASE_URL = "http://localhost:8080/api/products";
+  private static readonly BASE_URL = "http://localhost:8080/api";
 
   constructor(private httpClient: HttpClient) { }
 
   getProducts(categoryId: number): Observable<Product[]> {
-    const url = `${ ProductService.BASE_URL }/search/findByCategoryId?id=${ categoryId }`;
+    const url = `${ ProductService.BASE_URL }/products/search/findByCategoryId?id=${ categoryId }`;
 
     return this.httpClient.get<GetProductResponse>(url).pipe(
       map(response => response._embedded.products)
@@ -23,7 +23,7 @@ export class ProductService {
   }
 
   getProductCategories(): Observable<ProductCategory[]> {
-    const url = `${ ProductService.BASE_URL }/product-category`;
+    const url = `${ ProductService.BASE_URL }/product-categories`;
 
     return this.httpClient.get<GetProductCategoryResponse>(url).pipe(
       map(response => response._embedded.productCategories)
