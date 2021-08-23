@@ -136,6 +136,15 @@ aside.menu-sidebar.d-none.d-lg-block.clr {
   box-shadow: -2px 0 4px #0000003b;
 }
 
+.page-background {
+  width: 100%;
+  aspect-ratio: 960/300;
+  background-image: url('./assets/images/background-wave.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
