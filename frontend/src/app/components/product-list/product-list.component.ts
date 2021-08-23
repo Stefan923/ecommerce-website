@@ -18,6 +18,7 @@ export class ProductListComponent implements OnInit {
   totalElements: number = 0;
 
   previousCategoryId: number = 1;
+  previousKeyword: string = "";
 
   constructor(private productService: ProductService,
     private route: ActivatedRoute) { }
@@ -44,7 +45,11 @@ export class ProductListComponent implements OnInit {
     const routeKeyword: string | null = this.route.snapshot.paramMap.get('keyword');
     keyword = routeKeyword == null ? keyword : routeKeyword;
 
-    this.page = 1;
+    if (this.previousKeyword != keyword) {
+      this.previousKeyword = keyword;
+      this.page = 1;
+    }
+
     this.productService.getProductsByName(keyword, this.page - 1, this.pageSize).subscribe(this.processServiceResult());
   }
 
