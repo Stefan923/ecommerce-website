@@ -45,7 +45,7 @@ export class ProductListComponent implements OnInit {
     keyword = routeKeyword == null ? keyword : routeKeyword;
 
     this.page = 1;
-    this.productService.getProductsByName(keyword, this.page - 1, this.pageSize).subscribe(this.processServiceResult);
+    this.productService.getProductsByName(keyword, this.page - 1, this.pageSize).subscribe(this.processServiceResult());
   }
 
   handleListProducts() {
