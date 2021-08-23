@@ -65,6 +65,12 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts(categoryId, this.page - 1, this.pageSize).subscribe(this.processServiceResult());
   }
 
+  setPageSize(pageSize: number): void {
+    this.page = 1;
+    this.pageSize = pageSize;
+    this.listProducts();
+  }
+
   private processServiceResult() {
     return (data: GetResponseProducts): void => {
       this.products = data._embedded.products;
