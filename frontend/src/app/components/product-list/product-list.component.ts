@@ -70,6 +70,10 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts(categoryId, this.page - 1, this.pageSize).subscribe(this.processServiceResult());
   }
 
+  addToCart(product: Product) {
+    
+  }
+
   setPageSize(pageSize: number): void {
     this.page = 1;
     this.pageSize = pageSize;
