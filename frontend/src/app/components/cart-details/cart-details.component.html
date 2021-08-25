@@ -15,6 +15,14 @@
 
                     <td class="items">
                         <div class="items">
+                            {{ tempCartItem.name }}
+                        </div>
+
+                        <p class="mt-2">{{ tempCartItem.unitPrice | currency: 'USD' }}</p>
+                    </td>
+
+                    <td class="items">
+                        <div class="items">
                             <label>Quantity:</label> {{ tempCartItem.quantity }}
                         </div>
 
