@@ -13,15 +13,12 @@
                         <img src="{{ tempCartItem.imageUrl }}" class="img-responsive" width="150px" />
                     </td>
 
-                    <td class="items">
-                        <div class="items">
-                            {{ tempCartItem.name }}
-                        </div>
-
-                        <p class="mt-2">{{ tempCartItem.unitPrice | currency: 'USD' }}</p>
+                    <td>
+                        <p>{{ tempCartItem.name }}</p>
+                        <p>{{ tempCartItem.unitPrice | currency: 'USD' }}</p>
                     </td>
 
-                    <td class="items">
+                    <td>
                         <div class="items">
                             <label>Quantity:</label> {{ tempCartItem.quantity }}
                         </div>
