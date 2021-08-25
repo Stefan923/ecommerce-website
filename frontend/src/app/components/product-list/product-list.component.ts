@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { GetResponseProducts, ProductService } from 'src/app/services/product.service';
+import {
+  GetResponseProducts,
+  ProductService,
+} from 'src/app/services/product.service';
 import { Product } from 'src/app/common/product';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CartService } from 'src/app/services/cart.service';
+import { CartItem } from 'src/app/common/cart-item';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-
   products: Product[] = [];
 
   page: number = 1;
@@ -18,10 +21,13 @@ export class ProductListComponent implements OnInit {
   totalElements: number = 0;
 
   previousCategoryId: number = 1;
-  previousKeyword: string = "";
+  previousKeyword: string = '';
 
-  constructor(private productService: ProductService,
-    private route: ActivatedRoute) { }
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
@@ -40,9 +46,10 @@ export class ProductListComponent implements OnInit {
   }
 
   handleSearchProducts() {
-    let keyword: string | null = "";
+    let keyword: string | null = '';
 
-    const routeKeyword: string | null = this.route.snapshot.paramMap.get('keyword');
+    const routeKeyword: string | null =
+      this.route.snapshot.paramMap.get('keyword');
     keyword = routeKeyword == null ? keyword : routeKeyword;
 
     if (this.previousKeyword != keyword) {
@@ -50,7 +57,9 @@ export class ProductListComponent implements OnInit {
       this.page = 1;
     }
 
-    this.productService.getProductsByName(keyword, this.page - 1, this.pageSize).subscribe(this.processServiceResult());
+    this.productService
+      .getProductsByName(keyword, this.page - 1, this.pageSize)
+      .subscribe(this.processServiceResult());
   }
 
   handleListProducts() {
@@ -58,7 +67,8 @@ export class ProductListComponent implements OnInit {
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
 
     if (hasCategoryId) {
-      let routeCategoryId: string | null = this.route.snapshot.paramMap.get('id');
+      let routeCategoryId: string | null =
+        this.route.snapshot.paramMap.get('id');
       categoryId = routeCategoryId == null ? 1 : +routeCategoryId;
     }
 
@@ -67,7 +77,13 @@ export class ProductListComponent implements OnInit {
       this.page = 1;
     }
 
-    this.productService.getProducts(categoryId, this.page - 1, this.pageSize).subscribe(this.processServiceResult());
+    this.productService
+      .getProducts(categoryId, this.page - 1, this.pageSize)
+      .subscribe(this.processServiceResult());
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(new CartItem(product));
   }
 
   setPageSize(pageSize: number): void {
@@ -82,7 +98,6 @@ export class ProductListComponent implements OnInit {
       this.page = data.page.number + 1;
       this.pageSize = data.page.size;
       this.totalElements = data.page.totalElements;
-    }
+    };
   }
-
 }
