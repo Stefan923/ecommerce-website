@@ -31,13 +31,19 @@
                                     </button>
                                 </div>
 
-                                <div class="col ml-4 mr-2">
+                                <div class="col ml-3 mr-1">
                                     {{ tempCartItem.quantity }}
                                 </div>
 
                                 <div class="col">
                                     <button (click)="decrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
                                         <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col">
+                                    <button (click)="remove(tempCartItem)" class="btn btn-primary btn-sm">
+                                        <i class="far fa-trash-alt"></i>
                                     </button>
                                 </div>
                             </div>
