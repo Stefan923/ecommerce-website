@@ -21,7 +21,31 @@
 
                         <td>
                             <div class="items">
-                                <label>Quantity:</label> {{ tempCartItem.quantity }}
+                                <label>Quantity:</label>
+                            </div>
+
+                            <div class="row no-gutters">
+                                <div class="col">
+                                    <button (click)="incrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col ml-3 mr-1">
+                                    {{ tempCartItem.quantity }}
+                                </div>
+
+                                <div class="col">
+                                    <button (click)="decrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col">
+                                    <button (click)="remove(tempCartItem)" class="btn btn-primary btn-sm">
+                                        <i class="far fa-trash-alt"></i>
+                                    </button>
+                                </div>
                             </div>
 
                             <p class="mt-2">Subtotal: {{ tempCartItem.quantity * tempCartItem.unitPrice | currency:
