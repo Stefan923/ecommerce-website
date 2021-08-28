@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CheckoutComponent implements OnInit {
 
-  checkoutFormGroup: FormGroup | undefined = undefined;
+  checkoutFormGroup!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -16,7 +16,7 @@ export class CheckoutComponent implements OnInit {
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: [''],
-        lastName: [""],
+        lastName: [''],
         email: ['']
       })
     })
