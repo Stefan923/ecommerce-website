@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FromService } from 'src/app/services/from.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,7 +14,11 @@ export class CheckoutComponent implements OnInit {
   totalPrice: number = 0;
   totalQuantity: number = 0;
 
-  constructor(private formBuilder: FormBuilder) { }
+  creditCardMonths: number[] = [];
+  creditCardYears: number[] = [];
+
+  constructor(private formBuilder: FormBuilder,
+    private formService: FromService) { }
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
@@ -44,7 +49,19 @@ export class CheckoutComponent implements OnInit {
         expirationMonth: [''],
         expirationYear: ['']
       })
-    })
+    });
+
+    this.formService.getCreditCardMonths().subscribe(
+      data => {
+        this.creditCardMonths = data;
+      }
+    )
+
+    this.formService.getCreditCardYears().subscribe(
+      data => {
+        this.creditCardYears = data;
+      }
+    )
   }
 
   copyShippingToBillingAddress(inputElement: HTMLInputElement) {
