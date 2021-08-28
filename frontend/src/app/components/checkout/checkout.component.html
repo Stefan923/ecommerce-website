@@ -106,6 +106,14 @@
                     </div>
                 </div>
 
+                <!-- Same Billing Address as Shipping Address Check Box -->
+                <div class="input-space">
+                    <label class="au-checkbox">
+                        <input type="checkbox" (change)="copyShippingToBillingAddress($any($event.target))">
+                        <span class="au-checkmark"></span>Use the shipping address as billing address
+                    </label>
+                </div>
+
                 <!-- Billing Address Form Group -->
                 <div formGroupName="billingAddress" class="form-area">
                     <h3>Billing Address</h3>
