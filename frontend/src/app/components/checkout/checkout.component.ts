@@ -50,18 +50,38 @@ export class CheckoutComponent implements OnInit {
         expirationYear: ['']
       })
     });
-
-    this.formService.getCreditCardMonths().subscribe(
+    
+    const startMonth: number = new Date().getMonth() + 1;
+    this.formService.getCreditCardMonths(startMonth).subscribe(
       data => {
         this.creditCardMonths = data;
       }
-    )
+    );
 
     this.formService.getCreditCardYears().subscribe(
       data => {
         this.creditCardYears = data;
       }
-    )
+    );
+  }
+
+  handleExpirationDate() {
+    const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
+
+    const currentYear: number = new Date().getFullYear();
+    const selectedYear: number = Number(creditCardFormGroup?.value.expirationYear);
+
+    let startMonth: number = 1;
+
+    if (selectedYear === currentYear) {
+      startMonth = new Date().getMonth() + 1;
+    }
+
+    this.formService.getCreditCardMonths(startMonth).subscribe(
+      data => {
+        this.creditCardMonths = data;
+      }
+    );
   }
 
   copyShippingToBillingAddress(inputElement: HTMLInputElement) {
