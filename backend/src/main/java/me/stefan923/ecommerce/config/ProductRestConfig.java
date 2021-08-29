@@ -1,7 +1,9 @@
 package me.stefan923.ecommerce.config;
 
+import me.stefan923.ecommerce.entity.Country;
 import me.stefan923.ecommerce.entity.Product;
 import me.stefan923.ecommerce.entity.ProductCategory;
+import me.stefan923.ecommerce.entity.State;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -15,8 +17,7 @@ import javax.persistence.metamodel.Type;
 @Configuration
 public class ProductRestConfig implements RepositoryRestConfigurer {
 
-    @Autowired
-    private EntityManager entityManager;
+    private final EntityManager entityManager;
 
     @Autowired
     public ProductRestConfig(EntityManager entityManager) {
@@ -36,6 +37,16 @@ public class ProductRestConfig implements RepositoryRestConfigurer {
 
         config.getExposureConfiguration()
                 .forDomainType(ProductCategory.class)
+                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
+                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
+
+        config.getExposureConfiguration()
+                .forDomainType(Country.class)
+                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
+                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
+
+        config.getExposureConfiguration()
+                .forDomainType(State.class)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
 
