@@ -37,7 +37,7 @@ public class ProductRestConfig implements RepositoryRestConfigurer {
 
         config.getExposureConfiguration()
                 .forDomainType(ProductCategory.class)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
+                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedMethods))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
 
         config.getExposureConfiguration()
