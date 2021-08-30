@@ -15,7 +15,7 @@ export class FromService {
   constructor(private httpClient: HttpClient) { }
 
   getAddressCountries(): Observable<Country[]> {
-    const url: string = `${FromService.BASE_URL}/country`;
+    const url: string = `${FromService.BASE_URL}/countries`;
 
     return this.httpClient.get<GetResponseCountries>(url).pipe(
       map(response => response._embedded.countries)
