@@ -13,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.metamodel.Type;
+import java.util.List;
 
 @Configuration
 public class ProductRestConfig implements RepositoryRestConfigurer {
@@ -29,28 +30,17 @@ public class ProductRestConfig implements RepositoryRestConfigurer {
         RepositoryRestConfigurer.super.configureRepositoryRestConfiguration(config, cors);
 
         HttpMethod[] unsupportedMethods = { HttpMethod.PUT, HttpMethod.POST, HttpMethod.DELETE };
-
-        config.getExposureConfiguration()
-                .forDomainType(Product.class)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
-
-        config.getExposureConfiguration()
-                .forDomainType(ProductCategory.class)
-                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedMethods))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
-
-        config.getExposureConfiguration()
-                .forDomainType(Country.class)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
-
-        config.getExposureConfiguration()
-                .forDomainType(State.class)
-                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods))
-                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(unsupportedMethods));
+        List<Class<?>> domainClasses = List.of(Product.class, ProductCategory.class, Country.class, State.class);
+        domainClasses.forEach(tClass -> disableUnsupportedMethods(config, tClass, unsupportedMethods));
 
         exposeIds(config);
+    }
+
+    private <T> void disableUnsupportedMethods(RepositoryRestConfiguration config, Class<T> tClass, HttpMethod[] unsupportedMethods) {
+        config.getExposureConfiguration()
+                .forDomainType(tClass)
+                .withItemExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedMethods))
+                .withCollectionExposure((metadata, httpMethods) -> httpMethods.disable(unsupportedMethods));
     }
 
     private void exposeIds(RepositoryRestConfiguration config) {
