@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Country } from '../common/country';
+import { State } from '../common/state';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,18 @@ export class FromService {
   constructor(private httpClient: HttpClient) { }
 
   getAddressCountries(): Observable<Country[]> {
-    const url: string = `${ FromService.BASE_URL }/country`;
+    const url: string = `${FromService.BASE_URL}/country`;
 
     return this.httpClient.get<GetResponseCountries>(url).pipe(
       map(response => response._embedded.countries)
+    );
+  }
+
+  getAddressStates(countryCode: string): Observable<State[]> {
+    const url: string = `${FromService.BASE_URL}/states/search/findByCountryCode?code=${countryCode}`;
+
+    return this.httpClient.get<GetResponseStates>(url).pipe(
+      map(response => response._embedded.states)
     );
   }
 
@@ -48,6 +57,12 @@ export class FromService {
 
 interface GetResponseCountries {
   _embedded: {
-    countries: Country[];
+    countries: Country[]
+  }
+}
+
+interface GetResponseStates {
+  _embedded: {
+    states: State[]
   }
 }
