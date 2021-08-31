@@ -96,7 +96,7 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  handleShippingAddressStates(formGroupName: string) {
+  handleAddressStates(formGroupName: string) {
     const shippingAddressFormGroup = this.checkoutFormGroup.get(formGroupName);
 
     const selectedCountryCode: string = shippingAddressFormGroup?.value.country.code;
