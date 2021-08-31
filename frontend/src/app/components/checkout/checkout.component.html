@@ -128,7 +128,7 @@
                         </div>
                         <div class="col-md-9">
                             <div class="input-space">
-                                <select formControlName="country">
+                                <select formControlName="country" (change)="handleAddressStates('billingAddress')">
                                     <option *ngFor="let country of countries" [ngValue]="country">
                                         {{ country.name }}
                                     </option>
