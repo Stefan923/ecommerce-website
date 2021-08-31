@@ -114,9 +114,11 @@ export class CheckoutComponent implements OnInit {
 
   copyShippingToBillingAddress(inputElement: HTMLInputElement) {
     if (inputElement.checked) {
+      this.billingAddressStates = this.shippingAddressStates;
       this.checkoutFormGroup.controls.billingAddress
         .setValue(this.checkoutFormGroup.controls.shippingAddress.value);
     } else {
+      this.billingAddressStates = [];
       this.checkoutFormGroup.controls.billingAddress.reset();
     }
   }
