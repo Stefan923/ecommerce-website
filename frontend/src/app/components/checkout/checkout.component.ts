@@ -124,7 +124,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
-
+    if (this.checkoutFormGroup.invalid) {
+      this.checkoutFormGroup.markAllAsTouched();
+    }
   }
 
   get firstName() {
