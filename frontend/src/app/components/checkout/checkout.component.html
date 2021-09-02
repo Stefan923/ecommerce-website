@@ -17,7 +17,7 @@
                                 <input formControlName="firstName" type="text">
 
                                 <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)" class="alert alert-danger">
-                                    <div *ngIf="firstName?.errors?.required">
+                                    <div *ngIf="firstName?.errors?.required || firstName?.errors?.notOnlyWhitespace">
                                         First name is required.
                                     </div>
 
@@ -38,7 +38,7 @@
                                 <input formControlName="lastName" type="text">
 
                                 <div *ngIf="lastName?.invalid && (lastName?.dirty || lastName?.touched)" class="alert alert-danger">
-                                    <div *ngIf="lastName?.errors?.required">
+                                    <div *ngIf="lastName?.errors?.required || firstName?.errors?.notOnlyWhitespace">
                                         Last name is required.
                                     </div>
 
@@ -59,7 +59,7 @@
                                 <input formControlName="email" type="text">
 
                                 <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
-                                    <div *ngIf="email?.errors?.required">
+                                    <div *ngIf="email?.errors?.required || firstName?.errors?.notOnlyWhitespace">
                                         Email is required.
                                     </div>
 
