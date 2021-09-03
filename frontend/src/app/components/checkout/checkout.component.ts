@@ -49,12 +49,12 @@ export class CheckoutComponent implements OnInit {
         zipCode: new FormControl('', [Validators.required, Validators.minLength(2), CheckoutValidators.notOnlyWhitespace])
       }),
       creditCard: this.formBuilder.group({
-        cardType: [''],
-        nameOnCard: [''],
-        cardNumber: [''],
-        securityCode: [''],
-        expirationMonth: [''],
-        expirationYear: ['']
+        cardType: new FormControl('', [Validators.required]),
+        nameOnCard: new FormControl('', [Validators.required, Validators.minLength(2), CheckoutValidators.notOnlyWhitespace]),
+        cardNumber: new FormControl('', [Validators.required, Validators.minLength(16), Validators.maxLength(16), CheckoutValidators.notOnlyWhitespace]),
+        securityCode: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(3), CheckoutValidators.notOnlyWhitespace]),
+        expirationMonth: new FormControl('', [Validators.required]),
+        expirationYear: new FormControl('', [Validators.required])
       })
     });
 
