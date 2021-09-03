@@ -182,4 +182,28 @@ export class CheckoutComponent implements OnInit {
     return this.checkoutFormGroup.get('billingAddress.zipcode');
   }
 
+  get cardType() {
+    return this.checkoutFormGroup.get('creditCard.cardType');
+  }
+
+  get nameOnCard() {
+    return this.checkoutFormGroup.get('creditCard.nameOnCard');
+  }
+
+  get cardNumber() {
+    return this.checkoutFormGroup.get('creditCard.cardNumber');
+  }
+
+  get securityCode() {
+    return this.checkoutFormGroup.get('creditCard.securityCode');
+  }
+
+  get expirationMonth() {
+    return this.checkoutFormGroup.get('creditCard.expirationMonth');
+  }
+
+  get expirationYear() {
+    return this.checkoutFormGroup.get('creditCard.expirationYear');
+  }
+
 }
