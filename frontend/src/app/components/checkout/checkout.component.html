@@ -378,12 +378,12 @@
                                 <div *ngIf="cardNumber?.invalid && (cardNumber?.dirty || cardNumber?.touched)"
                                     class="alert alert-danger">
                                     <div
-                                        *ngIf="cardNumber?.errors?.required || cardNumber?.errors?.notOnlyWhitespace">
+                                        *ngIf="cardNumber?.errors?.required">
                                         Card Number is required.
                                     </div>
 
-                                    <div *ngIf="cardNumber?.errors?.minlength">
-                                        Card Number must be at least 2 characters long.
+                                    <div *ngIf="cardNumber?.errors?.pattern">
+                                        Card Number must be exactly 2 digits long.
                                     </div>
                                 </div>
                             </div>
@@ -401,12 +401,12 @@
                                 <div *ngIf="securityCode?.invalid && (securityCode?.dirty || securityCode?.touched)"
                                     class="alert alert-danger">
                                     <div
-                                        *ngIf="securityCode?.errors?.required || securityCode?.errors?.notOnlyWhitespace">
+                                        *ngIf="securityCode?.errors?.required">
                                         Security Code is required.
                                     </div>
 
-                                    <div *ngIf="securityCode?.errors?.minlength">
-                                        Security Code must be at least 2 characters long.
+                                    <div *ngIf="securityCode?.errors?.pattern">
+                                        Security Code must be exactly 3 digits long.
                                     </div>
                                 </div>
                             </div>
