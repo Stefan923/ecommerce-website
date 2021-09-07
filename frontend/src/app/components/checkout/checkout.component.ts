@@ -173,7 +173,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   get shippingAddressZipcode() {
-    return this.checkoutFormGroup.get('shippingAddress.zipcode');
+    return this.checkoutFormGroup.get('shippingAddress.zipCode');
   }
 
   get billingAddressStreet() {
@@ -193,7 +193,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   get billingAddressZipcode() {
-    return this.checkoutFormGroup.get('billingAddress.zipcode');
+    return this.checkoutFormGroup.get('billingAddress.zipCode');
   }
 
   get cardType() {

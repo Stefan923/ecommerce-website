@@ -305,8 +305,7 @@
 
                                 <div *ngIf="billingAddressZipcode?.invalid && (billingAddressZipcode?.dirty || billingAddressZipcode?.touched)"
                                     class="alert alert-danger">
-                                    <div
-                                        *ngIf="billingAddressZipcode?.errors?.required || billingAddressZipcode?.errors?.notOnlyWhitespace">
+                                    <div *ngIf="billingAddressZipcode?.errors?.required || billingAddressZipcode?.errors?.notOnlyWhitespace">
                                         Zip code is required.
                                     </div>
 
