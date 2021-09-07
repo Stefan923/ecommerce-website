@@ -30,6 +30,8 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService) { }
 
   ngOnInit(): void {
+    this.updateReviewCartDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [Validators.required, Validators.minLength(2), CheckoutValidators.notOnlyWhitespace]),
@@ -124,6 +126,16 @@ export class CheckoutComponent implements OnInit {
       this.billingAddressStates = [];
       this.checkoutFormGroup.controls.billingAddress.reset();
     }
+  }
+
+  updateReviewCartDetails() {
+    this.cartService.totalQuantity.subscribe(
+      totalQuantity => this.totalQuantity = totalQuantity
+    );
+
+    this.cartService.totalPrice.subscribe(
+      totalPrice => this.totalPrice = totalPrice
+    );
   }
 
   onSubmit() {
