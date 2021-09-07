@@ -126,6 +126,7 @@ a:hover {
 
 .main-content {
   padding-top: 116px;
+  padding-bottom: 64px;
   min-height: 100vh;
 }
 
