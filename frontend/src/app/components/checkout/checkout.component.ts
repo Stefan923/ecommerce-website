@@ -179,6 +179,8 @@ export class CheckoutComponent implements OnInit {
       {
         next: response => {
           alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
+
+          this.resetCart();
         },
         error: err => {
           alert(`There was an error: ${err.message}`);
@@ -187,7 +189,7 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  resetCard() {
+  resetCart() {
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
