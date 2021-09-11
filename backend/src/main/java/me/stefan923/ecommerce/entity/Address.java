@@ -33,7 +33,6 @@ public class Address {
 
     @OneToOne
     @PrimaryKeyJoinColumn
-    @Column(name = "order")
     private Order order;
 
 }
